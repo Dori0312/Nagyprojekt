@@ -31,3 +31,22 @@ A platformon a felhasználók értékelhetik a filmeket pontszámokkal, így kö
 | k8  | Felület    | Megnézettként jelölés   | Lehetőségük van a már látott filmeket pipával jelölni. |
 | k9  | Jogosultság| Jogosultsági szintek    | - **Admin**: filmek törlése, hozzáadása<br>- **Felhasználó**: tartalmak megtekintése, kommentelés, kedvencekhez adás, értékelés, megjelölés megtekintettként |
 
+## Használati esetek
+ADMIN: Feladata a rendszer felügyelete, karbantartása, tesztelése. Ebből következően minden szerepkörbe be tud lépni, hogy ellenőrizze azok hibamentes üzemelését. Joguk van kommentet törölni, vagy módosítani, hiszen feladatuk moderálni a portálon való tartalmakat.
+FELHASZNÁLÓ: Jogában áll az oldalon megjelenő minden tartalom megtekintése, valamit ezekre adhat visszajelzéseket komment, és érétkelés formátumban. 
+
+## Megfeleltetés, hogyan fedik le a használati eseteket a követelmények
+
+## Alap forgatókönyv
+Amikor a felhasználó megnyitja a weboldalt, a Kezdőlap jelenik meg, ahol látható az oldal címe és a Bejelentkezés és Regisztráció opciók érhetők el. 
+A Regisztráció gombra kattintva egy panel nyílik, ahol a látogatók néhány alapadat megadásával hozhatják létre felhasználói fiókjukat. A Bejelentkezés opció kiválasztásakor a felhasználó a felhasználónevét és jelszavát adja meg. Hibás adat esetén a rendszer újra kéri a helyes bejelentkezési adatokat. Bejelentkezés után a bal oldalon a filmkategóriák találhatók, amelyek segítségével a látogatók böngészhetik a számukra érdekes műfajokat. Alapértelmezettként a legjobban értékelt filmek toplistája jelenik meg, a legmagasabb pontszámúaktól a legkevésbé értékeltig.
+Felhasználói jogosultsággal rendelkező személy esetén a kezdőlap bővített lehetőségeket kínál: a felhasználók megtekinthetik a filmeket, hozzászólhatnak azokhoz, hozzáadhatják kedvenceikhez a számukra tetsző alkotásokat, értékelhetik a filmeket, illetve jelölhetik a már megtekintett tartalmakat.
+Adminisztrátori jogosultsággal a felhasználó minden alapfunkcióhoz hozzáfér.
+
+## Jogosultsági szintek lehetőségei
+
+## Funkció - követelmény megfeleltetése
+
+## Fogalomszótár
+ADMIN (adminisztrátor) Oldal kezelője, lehetősége van kommentek törlésére.
+USER (felhasználó) Oldal fiókkal rendelkező felhasználója.
