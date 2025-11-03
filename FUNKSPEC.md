@@ -16,3 +16,6 @@ A mai világban a hagyományos filmértékelő oldalak sokszor nem képesek lép
 ## Igényelt üzleti folyamatok modellje
 
 A platformon a felhasználók értékelhetik a filmeket pontszámokkal, így könnyedén kiemelhetik a számukra legkedvesebb alkotásokat. Az értékelési rendszer biztosítja, hogy a legnépszerűbb filmek a lista élén jelenjenek meg, így a látogatók gyorsan megtalálhatják a közönség által legjobbnak ítélt filmeket. A regisztrált felhasználók testreszabhatják saját profiljukat, például módosíthatják nevüket és profilképüket. A rendszer két fő rangot különböztet meg – Admin és Felhasználó –, amelyek eltérő hozzáférési szinteket biztosítanak az oldal funkcióihoz és tartalmaihoz, így a biztonságos és rendezett működés garantált.
+
+## Követelménylista
+
