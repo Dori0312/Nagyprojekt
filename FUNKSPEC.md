@@ -19,3 +19,15 @@ A platformon a felhasználók értékelhetik a filmeket pontszámokkal, így kö
 
 ## Követelménylista
 
+| Id  | Modul       | Név                     | Leírás |
+|-----|------------|------------------------|--------|
+| k1  | Felület    | Regisztráció            | A felhasználók ezen az oldalon tudnak saját fiókot létrehozni a rendszerben, így hozzáférnek a filmadatbázishoz. |
+| k2  | Felület    | Bejelentkezés           | A felhasználók itt tudnak bejelentkezni, ha filmeket szeretnének megtekinteni, értékelni vagy kategorizálni igény szerint. |
+| k3  | Felület    | Kategóriák              | A felhasználók a filmek kategóriáit választhatják ki, és ezen belül szűrhetnek. |
+| k4  | Felület    | Filmek                  | Lehetőségük van megtekinteni a filmadatbázist, szűrhetnek év, értékelés, illetve cím szerint (A-Z, Z-A). |
+| k5  | Felület    | Kommentelési lehetőség  | A felhasználók a filmekhez kapcsolódó kommentekben vitathatják meg véleményüket. |
+| k6  | Felület    | Értékelési lehetőség    | Itt tudják értékelni kedvenc filmjeiket. |
+| k7  | Felület    | Kedvencekhez adás       | Lehetőségük van kedvencekhez hozzáadni a megnézett filmeket. |
+| k8  | Felület    | Megnézettként jelölés   | Lehetőségük van a már látott filmeket pipával jelölni. |
+| k9  | Jogosultság| Jogosultsági szintek    | - **Admin**: filmek törlése, hozzáadása<br>- **Felhasználó**: tartalmak megtekintése, kommentelés, kedvencekhez adás, értékelés, megjelölés megtekintettként |
+
