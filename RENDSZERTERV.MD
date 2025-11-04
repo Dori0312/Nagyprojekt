@@ -18,7 +18,7 @@ már tudnak értékelni és kommentelni a filmek alá.
     + Egységes, letisztul, felhasználóbarát grafikus design megalkotása
 * Backend:
     + Filipcsei István Koppány
-    + 
+    + Veres Dóra
     +
 * Feladatuk: 
     + A frontend kiszolgálása adatokkal.
@@ -26,7 +26,7 @@ már tudnak értékelni és kommentelni a filmek alá.
     + Adatbázist kezelő logika megírása (php)
 * Tesztelés:
     + Filipcsei István Koppány
-    + 
+    + Veres Dóra
     + 
 * Feladatuk: Hibák feltárása az üzembe helyezés előtt.
 
