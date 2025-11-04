@@ -96,67 +96,33 @@ internet hozzáférés mellett.
 ### Frontend kliens
 - VSCODE html, css
 
-## Adatbázis terv
+## Adatbázis terv (DBML/dbdiagram.io)
+### Táblák
+- Felhasználók (id, name, email, password, created_at)
+- Filmek (id, title, director, category, released, description, created_at)
+- Értékelések (id, rating, user_id, movie_id, created_at)
+- Kommentek (id, comment, user_id, movie_id, parent, created_at)
+- Kategóriák (id, name)
 
-* TABLE - USER
-    + STRING - USERNAME (PRIMARY_KEY)
-    + STRING - PASSWORD
-    + BOOL - ADMIN (FALSE ~ USER; TRUE ~ ADMIN)
-
-* TABLE - JOKES
-    + NUMBER - ID (PRIMARY_KEY, AUTO_INCREMENT)
-    + STRING - AUTHOR (FOREIGN_KEY(USER-USERNAME))
-    + STRING - CONTENT (UNIQUE)
-
-* TABLE - VOTES
-    + STRING - USER (FOREIGN_KEY(USER-USERNAME))
-    + NUMBER - JOKE (FOREIGN_KEY(JOKES-ID))
-    + INT - VOTE (-1 ~ DOWN; 0 ~ INTACT; 1 ~ UP)
-
-* TABLE - SAVED
-    + STRING - USER (FOREIGN_KEY(USER-USERNAME))
-    + NUMBER - JOKE (FOREIGN_KEY(JOKES-ID))
+[Vizuális Adatbázis Diagram Megtekintése](https://dbdiagram.io/d/Webshop-terv-68d53597d2b621e422e34d8d)
 
 ## Implementációs terv
-### Backend
-A webszerveren futú Rust alkalmazás és adatbázis tartalmazza az üzleti logikát,
-ezzel végpontokon keresztül lehet HTTP protokollnak megfelelően REST 
-architektúrának megfelelő kérésekkel komunnikálni, és állapotát módosítani.\
-MariaDB relációs adatbázis-kezelő rendszer fut a szerveren az adatok tárolására,
-kezelésére és karbantartására.
+### Backend (XAMPP Alapú)
+A webszerveren futó PHP szkriptek (Apache alatt) tartalmazzák az üzleti logikát és az adatkezelést.
+A külső rendszerek és a frontend (ha van) HTTP protokollnak megfelelően, REST architektúrához** hasonló API végpontokon keresztül kommunikálhatnak, főként JSON formátumú kérésekkel és válaszokkal. Ezeken a végpontokon keresztül lehet lekérni és módosítani a rendszer állapotát.
+A MariaDB relációs adatbázis-kezelő rendszer fut a szerveren az adatok tárolására, kezelésére és karbantartására. A PHP a PDO (PHP Data Objects) interfészen keresztül csatlakozik az adatbázishoz.
 ### Frontend
 A felhasználói felület, amely asztali alkalmazásban megjelenő weboldal 
-formájában érhető el, HTML, CSS, TypeScript nyelven íródott, Electron 
-keretrendszer segítségével asztali alkalmazásként jelennek meg ezek a weblapok.
+formájában érhető el, HTML, CSS, nyelven íródott.
 
 ## Tesztterv
 
 ## Telepítési terv
-+ **Fizikai telepítési terv**: Egy szervergépre MariaDB szoftver telepítése és
-beüzemelése szükséges, majd erre szükséges feltölteni az adatbázis sémát a
-megfelelő fájlokkal. Ugyanezen a szerveren szükséges a cargo parancssori
-alkalmazás telepítése, és ezen keresztül való építése, futtatása a Rust 
-forráskódnak.
-+ **Szoftver telepítési terv**: A portál eléréséhez elég az alkalmazás
-letöltése, telepítése, és futtatása egy olyan PC-n, amely internethez csatlakozik.
++ XAMPP-ot futtatni egy gépen 0-24
++ XAMPP elérési mappájában az index.html az adatbázis meg a többi cucc, ami kell neki
 
 ## Karbantartási terv
 ### Tartalmi karbantartás
-A portálon megjelenő feltöltött tartalmak folyamatos ellenőrzés alatt állnak,
-a nem kért, káros tartalmak törlésre kerülnek.\
-Időszakosan végezhető karbantartás, akár automatizálva is a regisztrált
-felhasználók neveinek ellenőrzése az esetlegesen előforduló sértő, káros szavak
-használata ellen.\
-Szintén időszakosan végezhető karbantartás, a troll felhasználók elleni
-védelem, akik gyakran sértő megjegyzéseket tesznek más felhasználók tartalma
-alá.
+Az adminok manuálisan szűrik a csúnya kommenteket, és törlik azokat.
 ### Rendszeres karbantartás
-+ **Adatbázis karbantartása**: Az adatbázisséma úgy van felépítve, hogy
-automatikusan tisztul a törölt felhasználók posztjaitól, illetve a portálra
-feltöltött tartalmak régi verziójától.\
-Időszakosan végzett karbantartás a felesleges adatok törlése, pl. spam kommentek,
-vagy inaktív felhasználók.\
-Az adatbázisról rendszeresen biztonsági mentés készül a szerverre.
-+ **Szerver karbantartása**: A szerver forráskódja megírása közben arra
-törekedünk, hogy későbbiekben a kódhoz ne kelljen hozzányúlni karbantartási
-célból (pl. függőségeknek elmentjük verziószámát).
+Az adminok végzik a filmek feltöltését, hogy ne legyen hiba a leírásukban.
