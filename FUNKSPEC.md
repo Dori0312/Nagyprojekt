@@ -45,7 +45,54 @@ Adminisztrátori jogosultsággal a felhasználó minden alapfunkcióhoz hozzáf�
 
 ## Jogosultsági szintek lehetőségei
 
+Felhasználói jogkörrel rendelkező felhasználók:
+A bejelentkezett felhasználók minden, a megtekintők számára elérhető funkciót használhatnak, emellett:
+Kommentelhetik a filmeket.
+Értékelhetik az egyes tartalmakat.
+Kedvencekhez adhatják a filmeket.
+Megjelölhetik megtekintettként a már látott filmeket.
+Profiljukat módosíthatják, beleértve a jelszóváltoztatást is.
+Kijelentkezhetnek, és visszatérhetnek a megtekintői módba.
+
+Adminisztrátori jogkör (fejlesztői jogosultság):
+Ez a jogosultsági szint kizárólag a fejlesztőket érinti.
+Hozzáférnek a rendszer teljes működéséhez.
+Tesztelhetik, karbantarthatják és frissíthetik az oldalt.
+Szükség esetén módosíthatják a felhasználói adatokat vagy törölhetnek hibás bejegyzéseket.
+Feladatuk a rendszer biztonságos, hibamentes üzemeltetésének biztosítása.
+
 ## Funkció - követelmény megfeleltetése
+
+K1 – Bejelentkezés nélküli interakciók elkerülése
+A főoldalon az értékelési és kommentelési funkciók alapértelmezetten le vannak tiltva. Ezek a lehetőségek kizárólag a bejelentkezett felhasználók számára érhetők el, így a rendszer biztosítja, hogy csak regisztrált tagok vehessenek részt az interakciókban.
+
+K2 – Tartalmak kategorizálása
+A navigációs sávban található „Kategóriák” menüpont segítségével a felhasználók könnyedén kiválaszthatják, milyen típusú filmeket szeretnének megtekinteni. A kategóriák szűrési lehetőséget is biztosítanak, például műfaj, év vagy értékelés alapján.
+
+K3 – Profil szerkesztése
+A „Profil” menüpontra kattintva a felhasználók módosíthatják az általuk megadott adatokat, például jelszót vagy megjelenített nevet. Emellett megtekinthetik kedvenc filmjeiket, értékeléseiket és a megtekintettként jelölt tartalmakat is.
+
+K4 – Filmértékelés és ajánlás küldése
+A bejelentkezett felhasználók lehetőséget kapnak arra, hogy saját filmértékeléseket vagy ajánlásokat küldjenek be a főoldalon. Az új bejegyzések azonnal megjelennek a filmek között, így mások is olvashatják és értékelhetik azokat.
+
+K5 – Toplista megjelenítése
+A főoldalon a filmek egy toplistában jelennek meg, amely a legmagasabb értékelésű tartalmakat helyezi előre. A felhasználók személyre szabott szűrőkkel rendezhetik a listát, például kategória, év vagy pontszám alapján.
+
+K6 – Admin felület
+Az admin (fejlesztői jogosultságú) felhasználók számára egy külön menüpont válik elérhetővé, amelyben karbantarthatják a rendszert, javíthatják a hibákat, és módosíthatják a felhasználói adatokat. Ez a funkció kizárólag a fejlesztés és tesztelés céljait szolgálja.
+
+K7 – Bejelentkezési és regisztrációs felület
+A bejelentkezési oldalon a felhasználók megadhatják bejelentkezési adataikat, vagy új fiókot hozhatnak létre. A sikeres bejelentkezést követően minden interaktív funkció (értékelés, kommentelés, kedvencekhez adás) elérhetővé válik számukra.
+
+K8 – Elfelejtett jelszó
+Amennyiben a felhasználó elfelejti jelszavát, a bejelentkezési oldalon kérhet újat, amelyet e-mailben vagy a rendszer által biztosított felületen keresztül állíthat be.
+
+K9 – Jogosultsági szintek
+A rendszer két jogosultsági szintet különböztet meg:
+
+Felhasználó: megtekintheti a filmeket, értékelhet, kommentelhet, kedvencekhez adhat és megjelölheti a filmeket megtekintettként.
+
+Admin (fejlesztő): hozzáfér a rendszer teljes funkcionalitásához, karbantartást végezhet, hibát javíthat és kezelheti a felhasználói adatokat.
 
 ## Fogalomszótár
 ADMIN (adminisztrátor) Oldal kezelője, lehetősége van kommentek törlésére.
