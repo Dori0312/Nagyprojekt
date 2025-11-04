@@ -60,34 +60,29 @@ már tudnak értékelni és kommentelni a filmek alá.
 
 + Kommentek tárolása (Csakis szöveget kezel)
 + Felhasználók adatainak tárolása (felhasználónév, jelszó, email)
-+ Webes környezeten működőképes (reszponzív, így számítógépen / telefonon is megjeleníthető)
-+ Képes úgy megjelíteni posztokat, hogy nincs aktív bejelentkezett felhasználó
-+ Bejelentkezett felhasználó reakciót adhat különböző más felhasználók tevékenységeire
++ Bejelentkezett felhasználó képes filmet értékelni, mely az adatbázisban kerül eltárolásra
 + A webes felület gördülékenyen kommunikál a hozzárendelt adatbázissal
++ A webes felületen kezel adatbázist (Film Hozzáadása, Kommentelés, Törlés funkciók)
 
-### Nemfunkcionális követelmények
+### Nem funkcionális követelmények
 
-- Felhasználók nem módosíthatnak más felhasználók bejegyzéseit
-- Felhasználók nem férhetnek hozzá más felhasználók személyes adataihoz csak a felhasználónevüket és profilképüket láthatják
-- Az oldal könnyen kezelhető, minimális informatikai tudással igénybe vehető
-- Webes felületen kezel adatbázist
-- Az oldal eléréséhez egy okoseszközre és internethozzáférésre van szükség, így nem igényel különleges hardveres támogatást
-- Használatához telepítés nem szükséges, különböző kiegészítők használata nélkül is elérhető
+- Nem regisztrált látogató esetén, nem jeleníti meg a számára elérhetetlen funkciókat (bizonyos gombok elrejtése, pl.: Kommentelés)
+- Nem adminisztrátor látogató esetén, nem jeleníti meg a számára elérhetetlen funkciókat (bizonyos gombok elrejtése, pl.: Film Hozzáadása)
+- Használatához telepítés nem szükséges
 
 ## Funkcionális terv
 
 ### 5.1 Rendszerszereplők
 
 + **ADMIN**
-    - a rendszer felügyelete az elsődleges feladata, ennek tesztelésére minden szerepkörbe be tud lépni, hogy ellenőrizze azok hibamentes üzemelését
+    - a rendszer felügyelete az elsődleges feladata, hozzáfér mindenhez, kezelni tudja az összes oldalon és adatbázisban megjelenő adatot
 
 + **FELHASZNÁLÓ**
-    - jogában áll az oldalon megjelenő minden tartalom megtekintése, valamint az ezekre adott visszajelző rendszerek használata
-    - különböző bejegyzéseket posztolhat, más bejegyzésekre pontokat adhat
+    - különböző filmek alá kommentelhet és értékelhet
 
 + **LÁTOGATÓ**
-    - az oldalon megjelenő bejegyzéseket tekintheti meg
-    - a bejegyzéssel nem interaktálhat csak ha rendelkezik profillal
+    - az oldalon megjelenő filmeket és a felhasználók kommentjeit tekintheti meg
+    - filmet nem értékelhet csak ha rendelkezik profillal
 
 ## Fizikai környezet
 - Az alkalmazás asztali platformra készült, amely elérhető bármilyen PC-ről,
@@ -96,20 +91,10 @@ internet hozzáférés mellett.
 
 ## Architekturális terv
 ### Backend szerver
-- A webszerver tokio futtatási környezet alatt fut, amely egy több szálon futó, 
-aszinkron futtatási idő Rust nyelvhez.
-- Axum keretrendszerre épül, ez adja az útválasztót, illetve végpontok írásához
-szükséges eszközöket.
-- Rust programozási nyelven íródott, amely egy rendszerszintű programozási
-nyelv, célja, hogy biztonságos és gyors is legyen.
-- REST architektúrán íródott, és JSON formátumban kéri/várja a HTTP 
-kéréseket/válaszokat.
+- A webszerver XAMPP Apache disztribúcióval megy
+- VSCODE php és sql
 ### Frontend kliens
-- Electron keretrendszerrel íródott, amely egy olyan nyílt forráskódú 
-keretrendszer, amely segítségével webes technológiákat, pl HTML, CSS, JavaScript,
-lehet használni asztali alkalmazások létrehozására.
-- TypeScript programozási nyelven íródott, amely egy JavaScript-alapú programozási
-nyelv, lehetővé teszi statikus típusok használatát.
+- VSCODE html, css
 
 ## Adatbázis terv
 
