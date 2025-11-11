@@ -1,11 +1,96 @@
-@import 'tailwindcss';
+body {
+    background-image: url('../images/bg.png'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 75px;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+section
+{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: x-large;
+}
+
+.logo {
+    max-width: 300px; 
+    height: auto;
+    width: 100%; 
+}
+
+.button1 {
+    background-color: #0f3f39;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    
+    padding: 10px 20px;
+    margin: 5px;
+    
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.button1:hover {
+    background-color: #13cfb9;
+    color: white;
+}
+
+.topMovesFelsorolva {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+    justify-content: center;
+}
+
+.listed {
+    flex: 1 1 200px;
+    height: 300px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; 
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+.listed img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+    display: block;
+}
+
+.listed:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 1);
+    height: 320px;
+}
+
+.leiras {
+    text-align: left;
+    display: flex;
+}
+
+.descIMG {
+    width: 450px;
+    height: auto;
 }
