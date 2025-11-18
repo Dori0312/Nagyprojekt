@@ -5,6 +5,10 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController; // HOZZÁADVA!
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use App\Http\Controllers\MovieController;
+
+// Főoldal
+Route::view('/', 'welcome');
 
 // --- REGISZTRÁCIÓS ÚTVONALAK ---
 // Regisztrációs űrlap megjelenítése
@@ -25,7 +29,13 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
+    Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
+});
+
 // --- HOME ÚTVONAL (Védett oldal) ---
+
 Route::get('/home', function() {
     if (auth()->check()) {
         // Ha be van jelentkezve, megjeleníti a 'home' nézetet a felhasználó nevével
