@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Http\Controllers\MovieController;
 
+// Főoldal
+Route::view('/', 'welcome');
+
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register'); 
 
 Route::get('/', [RegistrationController::class, 'showRegistrationForm']);
