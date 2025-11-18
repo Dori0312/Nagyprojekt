@@ -97,3 +97,4 @@ Admin (fejlesztő): hozzáfér a rendszer teljes funkcionalitásához, karbantar
 ## Fogalomszótár
 ADMIN (adminisztrátor) Oldal kezelője, lehetősége van kommentek törlésére.
 USER (felhasználó) Oldal fiókkal rendelkező felhasználója.
+Kiegeszito file branch miatt
