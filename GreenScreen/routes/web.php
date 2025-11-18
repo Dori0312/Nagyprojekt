@@ -5,6 +5,9 @@ use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
+// Főoldal
+Route::view('/', 'welcome');
+
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register'); 
 
 Route::get('/', [RegistrationController::class, 'showRegistrationForm']);
