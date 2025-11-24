@@ -2,45 +2,33 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\RegistrationController; 
-use App\Http\Controllers\LoginController; // HOZZÁADVA!
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\QueryException;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 
-// Főoldal
+// Főoldal (csak ez kell)
 Route::view('/', 'welcome');
 
-// --- REGISZTRÁCIÓS ÚTVONALAK ---
-// Regisztrációs űrlap megjelenítése
-Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register'); 
-// Főoldal (alapértelmezetten a regisztrációt mutatja)
-Route::get('/', [RegistrationController::class, 'showRegistrationForm']);
-// Regisztrációs adatok feldolgozása
-Route::post('/register', [RegistrationController::class, 'registerUser']); // JAVÍTVA!
+// Regisztráció
+Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegistrationController::class, 'register']);
 
-// --- BEJELENTKEZÉS / KIJELENTKEZÉS ÚTVONALAK ---
-// Bejelentkezési űrlap megjelenítése
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-
-// Bejelentkezési adatok feldolgozása
+// Belépés
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); 
 Route::post('/login', [LoginController::class, 'login']);
 
 // Kijelentkezés
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
+// Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
 });
 
-// --- HOME ÚTVONAL (Védett oldal) ---
-
+// Protected /home oldal
 Route::get('/home', function() {
     if (auth()->check()) {
-        // Ha be van jelentkezve, megjeleníti a 'home' nézetet a felhasználó nevével
         return view('home', ['username' => auth()->user()->name]);
     }
-    // Ha nincs bejelentkezve, átirányít a bejelentkezésre
     return redirect()->route('login'); 
 })->name('home');
