@@ -5,6 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController; // HOZZÁADVA!
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use App\Http\Controllers\RatingController; // <-- ÚJ: Hozzáadva a RatingController használatához
 use App\Http\Controllers\MovieController;
 
 // Főoldal
@@ -41,6 +42,11 @@ Route::get('/home', function() {
         // Ha be van jelentkezve, megjeleníti a 'home' nézetet a felhasználó nevével
         return view('home', ['username' => auth()->user()->name]);
     }
-    // Ha nincs bejelentkezve, átirányít a bejelentkezésre
-    return redirect()->route('login'); 
+    return redirect()->route('register');
 })->name('home');
+
+// ÚJ ÚTVONAL: Értékelés mentése vagy frissítése
+// Csak bejelentkezett felhasználók használhatják (middleware('auth'))
+Route::post('/rating', [RatingController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('rating.store');
