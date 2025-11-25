@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->text('comment');
+            $table->integer('user_id');
+            $table->integer('movie_id');
+            // $table->integer('parent');
+            $table->timestamps();
+        });
     }
 
     /**
