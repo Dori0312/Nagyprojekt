@@ -13,33 +13,19 @@ class RegistrationController extends Controller
 {
     public function showRegistrationForm()
     {
-        try {
-
-            DB::connection()->getPdo();
-
-            if (!DB::getSchemaBuilder()->hasTable('users')) {
-                return view('migration_error'); 
-            }
-            return view('welcome'); 
-
-        } catch (\Exception $e) {
-            if ($e instanceof QueryException && str_contains($e->getMessage(), 'Base table or view not found')) {
-                 return view('migration_error'); 
-            }
-            return view('database_error'); 
-        }
+        return view('auth.register');
     }
 
-    public function registerUser(RegistrationRequest $request)
+    public function register(RegistrationRequest $request)
     {
         $user = User::create([
-            'name' => $request->felhasznalonev, 
-            'email' => $request->emailcim,      
-            'password' => Hash::make($request->jelszo), 
+            'name' => $request->felhasznalonev,
+            'email' => $request->emailcim,
+            'password' => Hash::make($request->jelszo),
         ]);
 
         Auth::login($user);
-        
+
         return redirect('/home')->with('success', 'Sikeres regisztráció!');
     }
 }

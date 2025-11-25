@@ -10,8 +10,12 @@
 </head>
 <body>
     <header>
-        <button type="button" class="button1" onclick="location.href='register_form.html'">Regisztráció</button>
-        <button type="button" class="button1" onclick="location.href='login_form.html'">Belépés</button>
+        <button type="button" class="button1" onclick="location.href='{{ route('register') }}'">
+            Regisztráció
+        </button>
+        <button type="button" class="button1" onclick="location.href='{{ route('login') }}'">
+            Belépés
+        </button>
     </header>
     <h1>
         <img src="pictures/logo.png" alt="Logó" class="logo">
