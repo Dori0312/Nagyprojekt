@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController; 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use App\Http\Controllers\RatingController; // <-- ÚJ: Hozzáadva a RatingController használatához
 
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register'); 
 
@@ -17,3 +18,9 @@ Route::get('/home', function() {
     }
     return redirect()->route('register');
 })->name('home');
+
+// ÚJ ÚTVONAL: Értékelés mentése vagy frissítése
+// Csak bejelentkezett felhasználók használhatják (middleware('auth'))
+Route::post('/rating', [RatingController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('rating.store');

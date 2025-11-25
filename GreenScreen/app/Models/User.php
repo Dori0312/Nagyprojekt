@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+// HasMany Relation-hoz szükséges:
+use Illuminate\Database\Eloquent\Relations\HasMany; 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,5 +45,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    
+    // ÚJ KAPCSOLAT: Egy felhasználónak több értékelése lehet.
+    /**
+     * Get the ratings that the user has provided.
+     */
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class);
     }
 }
