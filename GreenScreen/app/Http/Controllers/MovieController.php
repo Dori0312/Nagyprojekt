@@ -31,4 +31,26 @@ class MovieController extends Controller
 
         return redirect()->route('movies.create')->with('success', 'Film sikeresen hozzáadva!');
     }
+    public function show(Movie $movie)
+{
+    $average = round($movie->ratings()->avg('rating'), 1);
+
+    return view('movies.show', compact('movie', 'average'));
+}
+
+public function rate(Request $request, Movie $movie)
+{
+    $request->validate([
+        'rating' => 'required|integer|min:1|max:10'
+    ]);
+
+    // Ha a user már értékelt → update
+    $movie->ratings()->updateOrCreate(
+        ['user_id' => auth()->id()],
+        ['rating' => $request->rating]
+    );
+
+    return back()->with('success', 'Értékelés mentve!');
+}
+
 }
