@@ -34,6 +34,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
 });
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
+Route::post('/movies/{movie}/rate', [MovieController::class, 'rate'])->middleware('auth')->name('movies.rate');
+
 
 // --- HOME ÚTVONAL (Védett oldal) ---
 
