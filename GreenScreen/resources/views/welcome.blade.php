@@ -1,51 +1,53 @@
-<!-- Home page -->
-<!doctype html>
-<html lang="hu">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-</head>
-<body>
-    <header>
-        <button type="button" class="button1" onclick="location.href='{{ route('register') }}'">
-            Regisztráció
-        </button>
-        <button type="button" class="button1" onclick="location.href='{{ route('login') }}'">
-            Belépés
-        </button>
-    </header>
-    <h1>
-        <img src="pictures/logo.png" alt="Logó" class="logo">
-    </h1>
+@extends('layouts.app')
+
+@section('title', 'Főoldal és Felkapottak')
+
+@section('content')
+
     <section class="topMovies">
-        <!-- Itt jeleníti meg a top filmek borítóját sorban`` -->
-         <h2>⭐ Felkapottak ⭐</h2>
+        <h2>⭐ Felkapottak ⭐</h2>
+
         <div class="topMovesFelsorolva">
-            <a href="28dayslater.html" class="listed">
-                <img src="film_kepek/28_nappal_kesobb.jpg" alt="28 days later">
-            </a>
-            <a href="deadpool.html" class="listed">
-                <img src="film_kepek/deadpool.png" alt="deadpool">
-            </a>
-            <a href="fightclub.html" class="listed">
-                <img src="film_kepek/harcosok_klubja.jpg" alt="fight club">
-            </a>
-            <a href="joker.html" class="listed">
-                <img src="film_kepek/joker.jpg" alt="joker">
-            </a>
-            <a href="shrex.html" class="listed">
-                <img src="film_kepek/shrek.jpg" alt="shrex">
-            </a>
-            <a href="elkurtuk.html" class="listed">
-                <img src="film_kepek/elkurtuk.jpg" alt="elkurtuk">
-            </a>
+
         </div>
     </section>
-    <section class="moviesList">
-        <!-- Itt jeleníti meg a filmeket az adatbázisból -->
+
+    <section class="moviesList mt-10">
+        <h2>Összes Film Adatbázisból</h2>
+
+        @if ($allMovies->count() > 0)
+            <ul class="movie-list">
+                @foreach ($allMovies as $movie)
+                    <li>
+                        <a href="{{ url('movies/' . $movie->slug) }}" class="text-blue-600 hover:text-blue-800 font-semibold">
+                            {{ $movie->title }} ({{ $movie->year }})
+                        </a>
+                        <span class="text-gray-500 text-sm ml-2">[{{ $movie->category }}]</span>
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <p class="text-lg text-gray-500">Jelenleg nincs film feltöltve az adatbázisba.</p>
+        @endif
+        
     </section>
-</body>
-</html>
+@endsection
+
+<style>
+    .moviesList .movie-list {
+        list-style-type: none;
+        padding: 0;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .moviesList .movie-list li {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        background-color: #fff;
+        text-align: left;
+        transition: background-color 0.2s;
+    }
+    .moviesList .movie-list li:hover {
+        background-color: #f5f5f5;
+    }
+</style>

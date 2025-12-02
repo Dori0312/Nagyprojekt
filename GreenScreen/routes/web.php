@@ -9,7 +9,7 @@ use App\Http\Controllers\RatingController; // <-- ÚJ: Hozzáadva a RatingContro
 use App\Http\Controllers\MovieController;
 
 // Főoldal (csak ez kell)
-Route::view('/', 'welcome');
+Route::get('/', [MovieController::class, "index"])->name('home');
 
 // Regisztráció
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
