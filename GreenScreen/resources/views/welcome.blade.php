@@ -16,16 +16,16 @@
         <h2>Összes Film Adatbázisból</h2>
 
         @if ($allMovies->count() > 0)
-            <ul class="movie-list">
+            <div class="movie-list">
                 @foreach ($allMovies as $movie)
-                    <li>
+                    <div>
                         <a href="{{ url('movies/' . $movie->slug) }}" class="text-blue-600 hover:text-blue-800 font-semibold">
                             {{ $movie->title }} ({{ $movie->year }})
                         </a>
                         <span class="text-gray-500 text-sm ml-2">[{{ $movie->category }}]</span>
-                    </li>
+                    </div>
                 @endforeach
-            </ul>
+                </div>
         @else
             <p class="text-lg text-gray-500">Jelenleg nincs film feltöltve az adatbázisba.</p>
         @endif
