@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\RegistrationController; 
-use App\Http\Controllers\LoginController; // HOZZÁADVA!
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
-use App\Http\Controllers\RatingController; // <-- ÚJ: Hozzáadva a RatingController használatához
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\WatchedMovieController; 
+use Illuminate\Support\Facades\Auth;
 
-// Főoldal (csak ez kell)
+// Főoldal (Top Movies)
 Route::get('/', [MovieController::class, "index"])->name('home');
 
 // Regisztráció
@@ -27,20 +29,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
 });
+
+// Film Megjelenítése
 Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
-Route::post('/movies/{movie}/rate', [MovieController::class, 'rate'])->middleware('auth')->name('movies.rate');
 
+// --- Bejelentkezett felhasználói funkciók ---
+Route::middleware('auth')->group(function () {
 
-// Protected /home oldal
-Route::get('/home', function() {
-    if (auth()->check()) {
-        return view('home', ['username' => auth()->user()->name]);
-    }
-    return redirect()->route('register');
-})->name('home');
+    // Film értékelése 
+    Route::post('/movies/{movie}/rate', [MovieController::class, 'rate'])->name('movies.rate');
+    
+    // WatchedMovie állapot váltása (Megtekintett/Nem megtekintett)
+    Route::post('/movies/{movie}/watched/toggle', [WatchedMovieController::class, 'toggle'])
+        ->name('movies.watched.toggle');
+        
+    // ÚJ ÚTVONAL: Értékelés mentése vagy frissítése (RatingController használata)
 
-// ÚJ ÚTVONAL: Értékelés mentése vagy frissítése
-// Csak bejelentkezett felhasználók használhatják (middleware('auth'))
-Route::post('/rating', [RatingController::class, 'store'])
-    ->middleware(['auth'])
-    ->name('rating.store');
+    Route::post('/rating', [RatingController::class, 'store'])
+        ->name('rating.store');
+
+});
