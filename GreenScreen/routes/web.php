@@ -9,7 +9,8 @@ use App\Http\Controllers\RatingController; // <-- ÚJ: Hozzáadva a RatingContro
 use App\Http\Controllers\MovieController;
 
 // Főoldal (csak ez kell)
-Route::get('/', [MovieController::class, "index"])->name('home');
+Route::get('/', [MovieController::class, 'index'])->name('movies.index');
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->name('movies.destroy');
 
 // Regisztráció
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
