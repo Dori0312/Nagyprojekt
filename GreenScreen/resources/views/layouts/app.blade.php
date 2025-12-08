@@ -16,7 +16,7 @@
         </div>
 
         <h1 class="text-center my-6">
-            <img src="{{ asset('pictures/logo.png') }}" alt="Logó" class="logo mx-auto" style="max-height: 80px;">
+            <img src="{{ asset('pictures/logo.png') }}" alt="Logó" class="logo mx-auto" style="height: 80px; width: auto;">
         </h1>
 
         @yield('content')
