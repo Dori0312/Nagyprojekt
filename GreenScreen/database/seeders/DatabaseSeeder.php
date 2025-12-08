@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Movie::insert([
-            (object)['title' => '28 days later', 'slug' => '28dayslater', 'image_path' => 'film_kepek/28_nappal_kesobb.jpg'],
+            (object)['title' => '28 days later', 'slug' => '28dayslater', 'image_path' => 'film_kepek/28_nappal_kesobb.jpg'],/*
             (object)['title' => 'Deadpool', 'slug' => 'deadpool', 'image_path' => 'film_kepek/deadpool.png'],
             (object)['title' => 'Fight Club', 'slug' => 'fightclub', 'image_path' => 'film_kepek/harcosok_klubja.jpg'],
             (object)['title' => 'Joker', 'slug' => 'joker', 'image_path' => 'film_kepek/joker.jpg'],
             (object)['title' => 'Shrek', 'slug' => 'shrek', 'image_path' => 'film_kepek/shrek.jpg'],
-            (object)['title' => 'Elkurtuk', 'slug' => 'elkurtuk', 'image_path' => 'film_kepek/elkurtuk.jpg'],
+            (object)['title' => 'Elkurtuk', 'slug' => 'elkurtuk', 'image_path' => 'film_kepek/elkurtuk.jpg'],*/
         ]);
     }
 }
