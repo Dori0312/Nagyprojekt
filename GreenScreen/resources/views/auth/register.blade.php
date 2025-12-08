@@ -104,11 +104,6 @@
                     </button>
                 </div>
             </form>
-            
-            <p class="mt-4 text-center text-sm text-gray-600">
-                Már van fiókod? 
-                <a href="{{ route('login') }}" class="text-blue-600 hover:text-blue-800 font-medium">Lépj be!</a>
-            </p>
 
         </main>
     </div>
