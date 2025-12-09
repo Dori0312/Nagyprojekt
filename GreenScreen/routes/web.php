@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\RegistrationController; 
-use App\Http\Controllers\LoginController; // HOZZÁADVA!
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
-use App\Http\Controllers\RatingController; // <-- ÚJ: Hozzáadva a RatingController használatához
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\WatchedMovieController; 
+use Illuminate\Support\Facades\Auth;
 
 // Főoldal (csak ez kell)
 
@@ -27,6 +29,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
 });
 
+// Film Megjelenítése
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
+
+// --- Bejelentkezett felhasználói funkciók ---
+Route::middleware('auth')->group(function () {
+
+    // Film értékelése 
+    Route::post('/movies/{movie}/rate', [MovieController::class, 'rate'])->name('movies.rate');
+    
+    // WatchedMovie állapot váltása (Megtekintett/Nem megtekintett)
+    Route::post('/movies/{movie}/watched/toggle', [WatchedMovieController::class, 'toggle'])
+        ->name('movies.watched.toggle');
+        
+    // ÚJ ÚTVONAL: Értékelés mentése vagy frissítése (RatingController használata)
+
+    Route::post('/rating', [RatingController::class, 'store'])
+        ->name('rating.store');
+
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [MovieController::class, "index"])->name('home');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 // Feltételezzük, hogy létezik egy Movie modell a modellek mappában
 // use App\Models\Movie; 
 
-class MovieController extends Controller
+class TopMoviesController extends Controller
 {
     /**
      * Megjeleníti a főoldalt a legnépszerűbb filmekkel.
