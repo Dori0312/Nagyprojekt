@@ -26,6 +26,6 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Sikeres regisztráció!');
+        return redirect('/login')->with('success', 'Sikeres regisztráció!');
     }
 }
