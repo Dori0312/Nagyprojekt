@@ -10,8 +10,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\WatchedMovieController; 
 use Illuminate\Support\Facades\Auth;
 
-// Főoldal (Top Movies)
-Route::get('/', [MovieController::class, "index"])->name('home');
+// Főoldal (csak ez kell)
 
 // Regisztráció
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
@@ -22,7 +21,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // Kijelentkezés
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 // Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -49,3 +48,16 @@ Route::middleware('auth')->group(function () {
         ->name('rating.store');
 
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [MovieController::class, "index"])->name('home');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
+    Route::post('/movies/{movie}/rate', [MovieController::class, 'rate'])->middleware('auth')->name('movies.rate');
+});
+
+// ÚJ ÚTVONAL: Értékelés mentése vagy frissítése
+// Csak bejelentkezett felhasználók használhatják (middleware('auth'))
+Route::post('/rating', [RatingController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('rating.store');

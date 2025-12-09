@@ -13,9 +13,9 @@ class RegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'felhasznalonev' => 'required|string|min:3',
-            'emailcim' => 'required|email|unique:users,email', 
-            'jelszo' => [
+            'name' => 'required|string|min:3',
+            'email' => 'required|email|unique:users,email', 
+            'password' => [
                 'required',
                 'string',
                 'min:8',
@@ -30,11 +30,11 @@ class RegistrationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'felhasznalonev.min' => 'A felhasználónévnek legalább 3 karakter hosszúnak kell lennie!',
-            'emailcim.email' => 'Érvénytelen e-mail cím.',
-            'emailcim.unique' => 'Ez az e-mail cím már regisztrálva van.',
-            'jelszo.min' => 'A jelszónak minimum 8 karakter hosszúságúnak kell lennie.',
-            'jelszo.regex' => 'A jelszónak tartalmaznia kell legalább egy nagybetűt, kisbetűt, számot és speciális karaktert.',
+            'name.min' => 'A felhasználónévnek legalább 3 karakter hosszúnak kell lennie!',
+            'email.email' => 'Érvénytelen e-mail cím.',
+            'email.unique' => 'Ez az e-mail cím már regisztrálva van.',
+            'password.min' => 'A jelszónak minimum 8 karakter hosszúságúnak kell lennie.',
+            'password.regex' => 'A jelszónak tartalmaznia kell legalább egy nagybetűt, kisbetűt, számot és speciális karaktert.',
         ];
     }
 }
