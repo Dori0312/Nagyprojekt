@@ -16,7 +16,11 @@
         </div>
 
         <h1 class="text-center my-6">
-            <img src="{{ asset('pictures/logo.png') }}" alt="Logó" class="logo mx-auto" style="height: 80px; width: auto;">
+            <a href="{{ route('movies.index') }}">
+            <img src="{{ asset('pictures/logo.png') }}" 
+             alt="Logó" 
+             class="logo mx-auto h-20 w-auto hover:opacity-80 transition">
+            </a>
         </h1>
 
         @yield('content')
