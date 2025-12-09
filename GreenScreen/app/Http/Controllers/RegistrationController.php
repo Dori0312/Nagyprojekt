@@ -19,13 +19,13 @@ class RegistrationController extends Controller
     public function register(RegistrationRequest $request)
     {
         $user = User::create([
-            'name' => $request->felhasznalonev,
-            'email' => $request->emailcim,
-            'password' => Hash::make($request->jelszo),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
         Auth::login($user);
 
-        return redirect('/home')->with('success', 'Sikeres regisztráció!');
+        return redirect('/')->with('success', 'Sikeres regisztráció!');
     }
 }
