@@ -14,18 +14,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Csak az e-mailt és a jelszót kell kérni bejelentkezéshez
-            'emailcim' => 'required|email',
-            'jelszo' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string',
         ];
     }
     
     public function messages(): array
     {
         return [
-            'emailcim.required' => 'Az e-mail cím megadása kötelező!',
-            'emailcim.email' => 'Érvénytelen e-mail cím formátum.',
-            'jelszo.required' => 'A jelszó megadása kötelező!',
+            'email.required' => 'Az e-mail cím megadása kötelező!',
+            'email.email' => 'Érvénytelen e-mail cím formátum.',
+            'password.required' => 'A jelszó megadása kötelező!',
         ];
     }
 }

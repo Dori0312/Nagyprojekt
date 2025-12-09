@@ -16,7 +16,7 @@
         </div>
 
         <h1 class="text-center my-6">
-            <a href="{{ route('movies.index') }}">
+            <a href="{{ route('home') }}">
             <img src="{{ asset('pictures/logo.png') }}" 
              alt="Logó" 
              class="logo mx-auto h-20 w-auto hover:opacity-80 transition">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest; // Ezt még létrehozzuk!
+use App\Http\Requests\LoginRequest;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +15,13 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        // Adatbázis ellenőrzés, hasonlóan a regisztrációhoz
+        // Adatbázis ellenőrzés, feltételezve, hogy a 'migration_error' és 'database_error' view-k léteznek
         try {
             DB::connection()->getPdo();
             if (!DB::getSchemaBuilder()->hasTable('users')) {
                 return view('migration_error'); 
             }
-            return view('login'); // Ezt a view-t hozzuk létre a 4. lépésben
+            return view('login'); 
 
         } catch (\Exception $e) {
              if ($e instanceof QueryException && str_contains($e->getMessage(), 'Base table or view not found')) {
@@ -36,23 +36,24 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        // A LoginRequest már validálta az adatokat, csak az emailt és jelszót kell átadnunk
+        // JAVÍTVA: A hitelesítő adatokban most már 'email' és 'password' kulcsokat használunk
         $credentials = [
-            'email' => $request->emailcim,
-            'password' => $request->jelszo,
+            'email' => $request->email,
+            'password' => $request->password,
         ];
 
         // Bejelentkezési kísérlet
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/home')->with('success', 'Sikeres bejelentkezés!');
+            // A web.php alapján a főoldal neve: 'home'
+            return redirect()->intended(route('home'))->with('success', 'Sikeres bejelentkezés!');
         }
 
-        // Sikertelen bejelentkezés esetén
+        // Sikertelen bejelentkezés esetén (a Laravel konvenciók szerint az 'email' kulcson küldjük a hibát)
         return back()->withErrors([
-            'emailcim' => 'A megadott adatok nem egyeznek a nyilvántartásban szereplő adatokkal.',
-        ])->onlyInput('emailcim');
+            'email' => 'A megadott hitelesítő adatok nem egyeznek a nyilvántartásban szereplő adatokkal.',
+        ])->onlyInput('email');
     }
 
     /**
@@ -64,6 +65,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        // A web.php alapján a főoldal (/) neve: 'home', de a '/' a default welcome oldal a web.php-ban
         return redirect('/')->with('success', 'Sikeres kijelentkezés!');
     }
 }
