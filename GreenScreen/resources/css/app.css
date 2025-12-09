@@ -6,7 +6,6 @@ body {
     background-position: center center;
     min-height: 100vh;
     text-align: center;
-    overflow: hidden;
 }
 
 h1 {
@@ -94,3 +93,18 @@ section
     width: 450px;
     height: auto;
 }
+
+table {
+            width: 100%; /* teljes szélesség */
+            border-collapse: collapse; /* szegélyek összeolvasztása */
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }

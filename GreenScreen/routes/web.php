@@ -10,7 +10,6 @@ use App\Http\Controllers\MovieController;
 
 // Főoldal (csak ez kell)
 
-
 // Regisztráció
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistrationController::class, 'register']);

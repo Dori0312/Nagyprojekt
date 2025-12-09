@@ -12,24 +12,16 @@ class MovieController extends Controller
      */
     public function index()
     {
-        // Mock adatok a Top filmekhez (6 db)
-        $topMovies = collect([
-            (object)['title' => '28 days later', 'slug' => '28dayslater', 'image_path' => 'film_kepek/28_nappal_kesobb.jpg'],
-            (object)['title' => 'Deadpool', 'slug' => 'deadpool', 'image_path' => 'film_kepek/deadpool.png'],
-            (object)['title' => 'Fight Club', 'slug' => 'fightclub', 'image_path' => 'film_kepek/harcosok_klubja.jpg'],
-            (object)['title' => 'Joker', 'slug' => 'joker', 'image_path' => 'film_kepek/joker.jpg'],
-            (object)['title' => 'Shrek', 'slug' => 'shrek', 'image_path' => 'film_kepek/shrek.jpg'],
-            (object)['title' => 'Elkurtuk', 'slug' => 'elkurtuk', 'image_path' => 'film_kepek/elkurtuk.jpg'],
-        ]);
+        $movies = Movie::all();
+        return view('welcome', compact('movies'));
+    }
 
-        // Mock adatok a teljes film listához
-        $allMovies = collect([
-            (object)['title' => 'Matrix', 'slug' => 'matrix', 'year' => 1999, 'category' => 'Scifi'],
-            (object)['title' => 'Ponyvaregény', 'slug' => 'pulpfiction', 'year' => 1994, 'category' => 'Krimi'],
-        ]);
+    public function destroy(Movie $movie)
+    {
+        $movie->delete();
 
-        // Átadja a $topMovies és $allMovies változókat a welcome.blade.php-nak
-        return view('welcome', compact('topMovies', 'allMovies'));
+        return redirect()->route('movies.index')
+                         ->with('success', 'A film sikeresen törölve!');
     }
     
     // -----------------------------------------------------------------------

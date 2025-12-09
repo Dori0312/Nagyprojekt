@@ -15,21 +15,38 @@
     <section class="moviesList mt-10">
         <h2>Összes Film Adatbázisból</h2>
 
-        @if ($allMovies->count() > 0)
-            <div class="movie-list">
-                @foreach ($allMovies as $movie)
-                    <div>
-                        <a href="{{ url('movies/' . $movie->slug) }}" class="text-blue-600 hover:text-blue-800 font-semibold">
-                            {{ $movie->title }} ({{ $movie->year }})
-                        </a>
-                        <span class="text-gray-500 text-sm ml-2">[{{ $movie->category }}]</span>
-                    </div>
-                @endforeach
-                </div>
-        @else
-            <p class="text-lg text-gray-500">Jelenleg nincs film feltöltve az adatbázisba.</p>
-        @endif
-        
+@if(session('success'))
+    <div style="color: green;">{{ session('success') }}</div>
+@endif
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cím</th>
+            <th>Év</th>
+            <th>Művelet</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($movies as $movie)
+        <tr>
+            <td>{{ $movie->id }}</td>
+            <td>{{ $movie->title }}</td>
+            <td>{{ $movie->year }}</td>
+
+            <td>
+                <form action="{{ route('movies.destroy', $movie) }}" method="POST" onsubmit="return confirm('Biztos törlöd?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Törlés</button>
+                </form>
+            </td>
+
+        </tr>
+        @endforeach
+    </tbody>
+</table>
     </section>
 @endsection
 
