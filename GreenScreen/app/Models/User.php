@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-// HasMany Relation-hoz szükséges:
 use Illuminate\Database\Eloquent\Relations\HasMany; 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\WatchedMovie;
+use App\Models\Rating; // <-- Kell az Eloquent kapcsolatokhoz
+use App\Models\Movie; // <-- Jó gyakorlat: Movie is importálva
 
 class User extends Authenticatable
 {
@@ -14,7 +16,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * A tömeges hozzárendeléshez engedélyezett attribútumok.
      *
      * @var list<string>
      */
@@ -22,10 +24,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin', 
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Az elrejtendő attribútumok.
      *
      * @var list<string>
      */
@@ -35,7 +38,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Attribútumok típuskényszerítése.
      *
      * @return array<string, string>
      */
@@ -44,15 +47,27 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean', // Admin mező casting-ja
         ];
     }
-    
-    // ÚJ KAPCSOLAT: Egy felhasználónak több értékelése lehet.
+
+    // ------------------------------------------------------------------
+    // KAPCSOLATOK (Relationships)
+    // ------------------------------------------------------------------
+
     /**
-     * Get the ratings that the user has provided.
+     * Egy felhasználóhoz több értékelés tartozhat (1:N kapcsolat).
      */
     public function ratings(): HasMany
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class); 
+    }
+
+    /**
+     * Egy felhasználóhoz több megtekintett film bejegyzés tartozhat (1:N kapcsolat).
+     */
+    public function watchedMovies(): HasMany
+    {
+        return $this->hasMany(WatchedMovie::class);
     }
 }
