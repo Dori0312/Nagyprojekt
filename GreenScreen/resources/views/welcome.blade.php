@@ -36,11 +36,17 @@
             <td>{{ $movie->year }}</td>
 
             <td>
+                {{-- >>>>> IDEIGLENES JAVÍTÁS: A Törlés gomb (ami hibát okoz) kikommentelve. <<<<<
+                     A hiba oka a routes/web.php fájlban van! 
+                --}}
+                {{--
                 <form action="{{ route('movies.destroy', $movie) }}" method="POST" onsubmit="return confirm('Biztos törlöd?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Törlés</button>
                 </form>
+                --}}
+                Törlés (Javítás folyamatban)
             </td>
 
         </tr>

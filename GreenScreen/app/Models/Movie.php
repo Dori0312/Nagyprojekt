@@ -12,7 +12,12 @@ class Movie extends Model
 
     protected $fillable = [
         'title', 
-        'release_year',
+        'year', 
+        'director',     
+        'category',      
+        'description',   
+        'slug',
+        'image_path',
     ];
 
     public function ratings(): HasMany

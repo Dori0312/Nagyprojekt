@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-            Schema::create('movies', function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('director');
+            
+            $table->string('slug')->unique();
+            $table->string('image_path')->nullable();
+            // >>>>>>>>>>> JAVÍTÁS VÉGE <<<<<<<<<<
+
+            $table->string('director')->nullable(); 
             $table->integer('year');
-            $table->string('category');
+            $table->string('category')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('create');
+        Schema::dropIfExists('movies');
     }
 };
