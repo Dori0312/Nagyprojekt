@@ -8,11 +8,12 @@ use Illuminate\Support\Collection;
 class MovieController extends Controller
 {
     /**
-     * Megjeleníti a főoldalt, lekérve a top 6 filmet és a teljes listát (Mock adatokkal).
+     * Megjeleníti a főoldalt, lekérve az összes filmet.
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::all(); 
+        
         return view('welcome', compact('movies'));
     }
 
@@ -20,14 +21,10 @@ class MovieController extends Controller
     {
         $movie->delete();
 
-        return redirect()->route('movies.index')
+        return redirect()->route('home')
                          ->with('success', 'A film sikeresen törölve!');
     }
     
-    // -----------------------------------------------------------------------
-    // A KORÁBBI METÓDUSOK ITT MARADNAK:
-    // -----------------------------------------------------------------------
-
     public function create()
     {
         return view('movies.create');
@@ -67,7 +64,6 @@ class MovieController extends Controller
             'rating' => 'required|integer|min:1|max:10'
         ]);
 
-        // Ha a user már értékelt → update
         $movie->ratings()->updateOrCreate(
             ['user_id' => auth()->id()],
             ['rating' => $request->rating]
@@ -75,5 +71,4 @@ class MovieController extends Controller
 
         return back()->with('success', 'Értékelés mentve!');
     }
-
 }
