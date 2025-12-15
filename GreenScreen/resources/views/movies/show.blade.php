@@ -23,6 +23,36 @@
             </div>
 
             @auth
+
+                <div class="card my-4 border-info">
+                    <div class="card-body">
+                        <h3>Megtekintett státusz</h3>
+
+                        @if (session('success'))
+                            <div style="color: green; font-weight: bold;">{{ session('success') }}</div>
+                        @elseif (session('error'))
+                            <div style="color: red; font-weight: bold;">{{ session('error') }}</div>
+                        @endif
+                        
+                        <form action="{{ route('movies.watched.toggle', $movie) }}" method="POST">
+                            @csrf
+                            
+                            @if ($isWatched)
+                                <p style="font-weight: bold; color: green;">Ezt a filmet már megjelölted megtekintettként.</p>
+                                <button type="submit" class="btn btn-warning">
+                                    ❌ Megtekintett jelölés eltávolítása
+                                </button>
+                            @else
+                                <p style="font-weight: bold; color: blue;">Jelöld meg, hogy megnézted!</p>
+                                <button type="submit" class="btn btn-primary">
+                                    ✅ Megjelölés megtekintettként
+                                </button>
+                            @endif
+                        </form>
+
+                    </div>
+                </div>
+
                 <div class="card my-4">
                     <div class="card-body">
                         <h3>Értékelés</h3>
@@ -36,7 +66,7 @@
                             
                             <label for="rating">Értékeld a filmet (1-10):</label>
                             <input type="number" name="rating" id="rating" min="1" max="10" required 
-                                   value="{{ old('rating') }}"> 
+                                    value="{{ old('rating') }}"> 
                             
                             @error('rating')
                                 <div style="color: red; font-weight: bold;">{{ $message }}</div>
@@ -48,10 +78,10 @@
                 </div>
             @else
                 <p class="text-center" style="font-weight: bold;">
-                    <a href="{{ route('login') }}">Jelentkezz be</a> az értékeléshez!
+                    <a href="{{ route('login') }}">Jelentkezz be</a> az értékeléshez és a film megjelöléséhez!
                 </p>
             @endauth
-            </div>
+        </div>
     </div>
 </div>
 @endsection
