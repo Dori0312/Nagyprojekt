@@ -3,16 +3,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\WatchedMovie;
+use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Collection;
 
 class MovieController extends Controller
 {
+
     /**
      * Megjeleníti a főoldalt, lekérve az összes filmet.
      */
     public function index()
     {
-        $movies = Movie::all(); 
+        $movies = Movie::all();
         
         return view('welcome', compact('movies'));
     }
@@ -22,7 +25,7 @@ class MovieController extends Controller
         $movie->delete();
 
         return redirect()->route('home')
-                         ->with('success', 'A film sikeresen törölve!');
+                          ->with('success', 'A film sikeresen törölve!');
     }
     
     public function create()
@@ -54,8 +57,17 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         $average = round($movie->ratings()->avg('rating'), 1);
+        
+        $isWatched = false;
+        
+        if (Auth::check()) {
 
-        return view('movies.show', compact('movie', 'average'));
+            $isWatched = WatchedMovie::where('user_id', Auth::id())
+                                       ->where('movie_id', $movie->id)
+                                       ->exists();
+        }
+        
+        return view('movies.show', compact('movie', 'average', 'isWatched'));
     }
 
     public function rate(Request $request, Movie $movie)
